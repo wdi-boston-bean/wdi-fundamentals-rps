@@ -65,7 +65,17 @@ describe("#getWinner", function() {
 });
 
 describe("#playToFive", function() {
+  var _getPlayerMove;
+  // mock the getPlayerMove function so it returns a computer playerMove
+  beforeEach(function() {
+    _getPlayerMove = getPlayerMove;
+    getPlayerMove = getComputerMove;
+  });
+  afterEach(function() {
+    getPlayerMove = _getPlayerMove;
+  });
   it ("should end the game once either the player or the computer has won 5 times.", function(){
-    expect(playToFive()[0] == 5 || playToFive()[1] == 5).toEqual(true);
+    var result = playToFive();
+    expect(result[0] == 5 || result[1] == 5).toEqual(true);
   });
 });
